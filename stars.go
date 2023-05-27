@@ -2,24 +2,6 @@ package main
 
 import "fmt"
 
-// func forward(n int) {
-// 	for i := 1; i <= n; i++ {
-// 		for j := 1; j <= i; j++ {
-// 			fmt.Print("*")
-// 		}
-// 		fmt.Println()
-// 	}
-// }
-
-// func reverse(n int) {
-// 	for i := n; i >= 1; i-- {
-// 		for j := 1; j <= i; j++ {
-// 			fmt.Print("*")
-// 		}
-// 		fmt.Println()
-// 	}
-// }
-
 // PrintStars print stars in increase/decreasing count
 type PrintStars interface {
 	Stars()
@@ -58,6 +40,4 @@ func main() {
 	c.Stars()
 	c.b = false
 	c.Stars()
-	// forward(n)
-	// reverse(n)
 }

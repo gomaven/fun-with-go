@@ -9,22 +9,6 @@ import (
 	"strings"
 )
 
-// func WordCount(value string) (int, int) {
-// 	// Match non-space character sequences.
-// 	re := regexp.MustCompile(`[\S]+`)
-
-// 	// Find all matches and return count.
-// 	results := re.FindAllString(value, -1)
-// 	//fmt.Printf("%T\n", results)
-// 	total := 0
-// 	for _, v := range results {
-// 		//fmt.Println(i, v)
-// 		//total += len(results[i])
-// 		total += len(v)
-// 	}
-// 	return len(results), total
-// }
-
 func main() {
 
 	c := flag.Bool("c", true, "count the bytes of a file")
@@ -66,26 +50,11 @@ func main() {
 		s := []rune(string(line))
 		words := strings.Fields(string(line)) // this gets word count
 		wordcount += len(words)
-		runecount += len(s) + 1 // adding newline character
+		runecount += len(s) + 1 // adding newline character - is this correct?
 
 	}
 	fmt.Printf("Number of lines: %d, %s\n", countlines, f)
 	fmt.Printf("Number of words: %d, %s\n", wordcount, f)
 	//fmt.Printf("Number of characters: %d, %s\n", charcount, f)
 	fmt.Printf("Number of characters: %d, %s\n", runecount, f)
-	//fmt.Printf("Number of characters: %d, %s\n", new, f)
-
-	// https://amehta.github.io/posts/2019/03/wc-implementation-in-go-lang/
-	// scanner := bufio.NewScanner(file)
-	// lines, words, characters := 0, 0, 0
-	// for scanner.Scan() {
-	// 	lines++
-
-	// 	line := scanner.Text()
-	// 	characters += len(line)
-
-	// 	splitLines := strings.Split(line, " ")
-	// 	words += len(splitLines)
-	// }
-	// fmt.Printf("%8d%8d%8d %s\n", lines, words, characters, file)
 }

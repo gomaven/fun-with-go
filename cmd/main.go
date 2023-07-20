@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"fun-with-go/fun"
 	"os"
@@ -8,24 +9,52 @@ import (
 )
 
 func main() {
+
+	args := os.Args
+
 	//var number int
-	number, err := strconv.Atoi(os.Args[1])
+	number, err := strconv.Atoi(args[1])
 	if err != nil {
 		fmt.Printf("The given input %v is not a number.\n", err)
 		fmt.Println("Exiting the program")
 		os.Exit(1)
 	}
 	fmt.Printf("Printing %d stars in ascending & descending order.\n", number)
-	c := fun.Count{
+	sn := fun.Count{
 		N: number,
 		B: true,
 	}
-	c.Stars()
-	c.B = false
-	c.Stars()
+	sn.Stars()
+	sn.B = false
+	sn.Stars()
 
-	fm, err := fun.GetFileMetadata("../gutenberg.txt")
+	// wordcount flags
+	w := flag.Bool("w", false, "number of words in a file")
+	c := flag.Bool("c", false, "number of bytes in a file")
+	l := flag.Bool("l", false, "number of lines in a file")
+	m := flag.Bool("m", false, "number of characters in a file")
+
+	flag.Parse()
+
+	file := args[len(args)-1]
+	fm, err := fun.GetFileMetadata(file)
 	if err == nil {
-		fmt.Println(fm)
+		if *w {
+			fmt.Printf("   %d %s\n", fm.WordCount, file)
+		}
+		if *l {
+			fmt.Printf("    %d %s\n", fm.LineCount, file)
+		}
+		if *c {
+			fmt.Printf("  %d %s\n", fm.ByteCount, file)
+		}
+		if *m {
+			fmt.Printf("  %d %s\n", fm.RuneCount, file)
+		}
+		if !*c && !*w && !*l && !*m {
+			fmt.Printf("    %d   %d  %d %s\n", fm.LineCount, fm.WordCount, fm.ByteCount, file)
+		}
+
 	}
+
 }

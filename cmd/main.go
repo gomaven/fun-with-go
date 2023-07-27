@@ -9,11 +9,9 @@ import (
 )
 
 func main() {
-
 	args := os.Args
 
-	//var number int
-	number, err := strconv.Atoi(args[1])
+	number, err := strconv.Atoi(args[len(args)-2])
 	if err != nil {
 		fmt.Printf("The given input %v is not a number.\n", err)
 		fmt.Println("Exiting the program")
@@ -40,16 +38,16 @@ func main() {
 	fm, err := fun.GetFileMetadata(file)
 	if err == nil {
 		if *w {
-			fmt.Printf("   %d %s\n", fm.WordCount, file)
+			fmt.Printf("Word count   %d %s\n", fm.WordCount, file)
 		}
 		if *l {
-			fmt.Printf("    %d %s\n", fm.LineCount, file)
+			fmt.Printf("Line count    %d %s\n", fm.LineCount, file)
 		}
 		if *c {
-			fmt.Printf("  %d %s\n", fm.ByteCount, file)
+			fmt.Printf("Char count  %d %s\n", fm.ByteCount, file)
 		}
 		if *m {
-			fmt.Printf("  %d %s\n", fm.RuneCount, file)
+			fmt.Printf("Rune count  %d %s\n", fm.RuneCount, file)
 		}
 		if !*c && !*w && !*l && !*m {
 			fmt.Printf("    %d   %d  %d %s\n", fm.LineCount, fm.WordCount, fm.ByteCount, file)
